@@ -1,17 +1,38 @@
 BEGIN {
+    PI = 3.14159;
     COLS = int(COLS / 10) * 10 + 1;
     LINES = int(LINES / 10) * 10 + 1;
     SCENE[COLS,LINES];
     ACTOR_POS_X = 0;
     ACTOR_POS_Y = 0;
+
+    TRANSLATE_POS_X = 0;
+    TRANSLATE_POS_Y = 0;
+
     while (1) {
-        drawGrid(COLS, LINES);
-        drawActor();
+        # drawGrid(COLS, LINES);
+        # drawActor();
+        drawCosine();
         renderScene();
 
         getline KEY < "/dev/tty";
         updateActorCoordinates();
     }
+}
+
+function drawCosine() {
+    translate(0,35);
+    y = TRANSLATE_POS_Y;
+    for(i = TRANSLATE_POS_X; i < COLS; i += 1) {
+        SCENE[i, TRANSLATE_POS_Y + int(y)];
+        # print("x pos: ", i, " y pos: ", int(y), " cos(i)=", cos(i/50));
+        y += cos(i/15);
+    }
+}
+
+function translate(x, y) {
+    TRANSLATE_POS_X = x;
+    TRANSLATE_POS_Y = y;
 }
 
 function updateActorCoordinates() {
