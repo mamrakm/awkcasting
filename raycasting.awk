@@ -10,7 +10,10 @@ BEGIN {
         drawActor();
         renderScene();
         getline KEY < "/dev/tty";
+    }
+}
 
+function updateActorCoordinates() {
         if(KEY == "w") {
             if(ACTOR_POS_Y > 0) {
                 ACTOR_POS_Y--;
@@ -31,7 +34,10 @@ BEGIN {
                 ACTOR_POS_X++;
             }
         }
-    }
+        if(KEY == "q") {
+            exit;
+        }
+        printf("\x1B[2J");
 }
 
 function drawActor() {
