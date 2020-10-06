@@ -5,7 +5,6 @@ BEGIN {
     ACTOR_POS_X = 0;
     ACTOR_POS_Y = 0;
     while (1) {
-        printf("\x1B[2J");
         drawGrid(COLS, LINES);
         drawActor();
         renderScene();
