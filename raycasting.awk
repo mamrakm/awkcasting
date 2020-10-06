@@ -45,7 +45,11 @@ function drawGrid(xLim, yLim) {
                     }
                 } else {
                     if (x % 10 == 0) {
-                        addSymbolToScene(x, y, "│");
+                        if(y % 10 == 0) {
+                            addSymbolToScene(x, y, "┼");
+                        } else {
+                            addSymbolToScene(x, y, "│");
+                        }
                     }
                     else {
                         if(y % 10 == 0) {
