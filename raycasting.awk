@@ -59,7 +59,7 @@ function drawGrid(xLim, yLim) {
 }
 
 function renderScene() {
-        for(y = 0;y <= LINES; y++) {
+    for(y = 0;y <= LINES; y++) {
         for(x = 0; x <= COLS; x++) {
             printf(SCENE[x, y]);
         }
