@@ -3,7 +3,7 @@ BEGIN {
     LINES = int(LINES / 10) * 10 + 1;
     SCENE[COLS,LINES];
     while (1) {
-        printf("\033[2J");
+        printf("\x1B[2J");
         drawGrid(COLS, LINES);
         renderScene();
         getline KEY;
