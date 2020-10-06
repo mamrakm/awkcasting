@@ -9,6 +9,8 @@ BEGIN {
     TRANSLATE_POS_X = 0;
     TRANSLATE_POS_Y = 0;
 
+    initScene();
+
     while (1) {
         # drawGrid(COLS, LINES);
         # drawActor();
@@ -20,13 +22,20 @@ BEGIN {
     }
 }
 
+function initScene() {
+    for(y = 0; y < LINES; y++) {
+        for(x = 0; x < COLS; x++) {
+            addSymbolToScene(x, y, " ");
+        }
+    }
+}
 function drawCosine() {
-    translate(0,35);
+    translate(0,20);
     y = TRANSLATE_POS_Y;
     for(i = TRANSLATE_POS_X; i < COLS; i += 1) {
-        SCENE[i, TRANSLATE_POS_Y + int(y)];
+        addSymbolToScene(i, TRANSLATE_POS_Y + int(y), "X");
         # print("x pos: ", i, " y pos: ", int(y), " cos(i)=", cos(i/50));
-        y += cos(i/15);
+        y += cos(i/10);
     }
 }
 
