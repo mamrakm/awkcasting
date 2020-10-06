@@ -9,7 +9,9 @@ BEGIN {
         drawGrid(COLS, LINES);
         drawActor();
         renderScene();
+
         getline KEY < "/dev/tty";
+        updateActorCoordinates();
     }
 }
 
