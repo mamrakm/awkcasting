@@ -2,46 +2,46 @@ BEGIN {
     PI = 3.14159;
     COLS = int(COLS / 10) * 10 + 1;
     LINES = int(LINES / 10) * 10 + 1;
-    SCENE[COLS,LINES];
     ACTOR_POS_X = 0;
     ACTOR_POS_Y = 0;
 
     TRANSLATE_POS_X = 0;
     TRANSLATE_POS_Y = 0;
 
-    initScene();
-
     while (1) {
+        initScene();
         # drawGrid(COLS, LINES);
         # drawActor();
         drawCosine();
         renderScene();
 
-        getline KEY < "/dev/tty";
-        updateActorCoordinates();
+        # getline KEY < "/dev/tty";
+        # updateActorCoordinates();
+        break;
     }
 }
 
 function initScene() {
-    for(y = 0; y < LINES; y++) {
-        for(x = 0; x < COLS; x++) {
+    for(y = 0; y <= LINES; y++) {
+        for(x = 0; x <= COLS; x++) {
             addSymbolToScene(x, y, " ");
         }
     }
 }
 function drawCosine() {
     translate(0,20);
-    y = TRANSLATE_POS_Y;
+    ycos = TRANSLATE_POS_Y;
     for(i = TRANSLATE_POS_X; i < COLS; i += 1) {
-        addSymbolToScene(i, TRANSLATE_POS_Y + int(y), "X");
-        # print("x pos: ", i, " y pos: ", int(y), " cos(i)=", cos(i/50));
-        y += cos(i/10);
+        # print(i,",",ycos);
+        addSymbolToScene(i, y, "▴");
+        print("x pos: ", i, " y pos: ", int(ycos), " cos(i)=", cos(i));
+        ycos += cos(i);
     }
 }
 
-function translate(x, y) {
-    TRANSLATE_POS_X = x;
-    TRANSLATE_POS_Y = y;
+function translate(xt, yt) {
+    TRANSLATE_POS_X = xt;
+    TRANSLATE_POS_Y = yt;
 }
 
 function updateActorCoordinates() {
