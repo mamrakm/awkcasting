@@ -2,8 +2,12 @@ BEGIN {
     COLS = int(COLS / 10) * 10 + 1;
     LINES = int(LINES / 10) * 10 + 1;
     SCENE[COLS,LINES];
-    drawGrid(COLS, LINES);
-    renderScene();
+    while (1) {
+        printf("\033[2J");
+        drawGrid(COLS, LINES);
+        renderScene();
+        getline KEY;
+    }
 }
 
 function drawGrid(xLim, yLim) {
