@@ -1,8 +1,7 @@
 BEGIN {
-    COLS -= 1;
-    LINES -= 1;
+    COLS = int(COLS / 10) * 10 + 1;
+    LINES = int(LINES / 10) * 10 + 1;
     SCENE[COLS,LINES];
-
     drawGrid(COLS, LINES);
     renderScene();
 }
@@ -29,21 +28,24 @@ function drawGrid(xLim, yLim) {
                 if(x == 0 || x == xLim - 1) {
                     addSymbolToScene(x, y, "│");
                 }
-                else {
-                    if(y == 0 || y == yLim - 1) {
-                        if (x % 10 == 0) {
-                            if (y == 0) {
-                                addSymbolToScene(x, y, "┬");
-                            }
-                            if(y == yLim - 1) {
-                                addSymbolToScene(x, y, "┴");
-                            }
-                        } else {
-                            addSymbolToScene(x, y, "─");
+                if(y == 0 || y == yLim - 1) {
+                    if (x % 10 == 0) {
+                        if (y == 0) {
+                            addSymbolToScene(x, y, "┬");
+                        }
+                        if(y == yLim - 1) {
+                            addSymbolToScene(x, y, "┴");
                         }
                     } else {
-                        if (x % 10 == 0) {
-                            addSymbolToScene(x, y, "│");
+                        addSymbolToScene(x, y, "─");
+                    }
+                } else {
+                    if (x % 10 == 0) {
+                        addSymbolToScene(x, y, "│");
+                    }
+                    else {
+                        if(y % 10 == 0) {
+                            addSymbolToScene(x, y, "─");
                         }
                         else {
                             addSymbolToScene(x, y, " ");
