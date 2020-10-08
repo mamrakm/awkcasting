@@ -43,12 +43,12 @@ function drawCosine() {
 
 function drawSine() {
     translate(0, 25);
-    ycos = 0;
+    ysin = 0;
     for(i = 0; i < COLS; i += 1) {
-        # print("ycos: ", ceil(ycos));
-        addSymbolToScene(i, ceil(ycos), "\x1B[94m▴\x1B[0m");
-        print("x pos: ", i, " y pos: ", ceil(ycos), " cos(i)=", cos(i));
-        ycos += sin(i/10);
+        # print("ysin: ", ceil(ysin));
+        addSymbolToScene(i, ceil(ysin), "\x1B[94m▴\x1B[0m");
+        print("x pos: ", i, " y pos: ", ceil(ysin), " sin(i)=", sin(i));
+        ysin += sin(i/10);
     }
 }
 
