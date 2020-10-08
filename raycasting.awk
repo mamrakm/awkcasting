@@ -24,31 +24,32 @@ BEGIN {
 }
 
 function initScene() {
-    for(y = 0; y < LINES; y++) {
-        for(x = 0; x < COLS; x++) {
-            addSymbolToScene(x, y, " ");
+    for(_y = 0; _y < LINES; _y++) {
+        for(_x = 0; _x < COLS; _x++) {
+            addSymbolToScene(_x, _y, " ");
         }
     }
 }
+
 function drawCosine() {
     translate(0, 25);
-    ycos = 0;
+    _ycos = 0;
     for(i = 0; i < COLS; i += 1) {
-        # print("ycos: ", ceil(ycos));
-        addSymbolToScene(i, ceil(ycos), "\x1B[93m▴\x1B[0m");
-        print("x pos: ", i, " y pos: ", ceil(ycos), " cos(i)=", cos(i));
-        ycos += cos(i/10);
+        # print("_ycos: ", ceil(_ycos));
+        addSymbolToScene(i, ceil(_ycos), "\x1B[93m▴\x1B[0m");
+        # print("x pos: ", i, " y pos: ", ceil(_ycos), " cos(i)=", cos(i));
+        _ycos += cos(i/10);
     }
 }
 
 function drawSine() {
     translate(0, 25);
-    ysin = 0;
-    for(i = 0; i < COLS; i += 1) {
-        # print("ysin: ", ceil(ysin));
-        addSymbolToScene(i, ceil(ysin), "\x1B[94m▴\x1B[0m");
-        print("x pos: ", i, " y pos: ", ceil(ysin), " sin(i)=", sin(i));
-        ysin += sin(i/10);
+    _ysin = 0;
+    for(_i = 0; _i < COLS; _i += 1) {
+        # print("_ysin: ", ceil(_ysin));
+        addSymbolToScene(_i, ceil(_ysin), "\x1B[94m▴\x1B[0m");
+        # print("x pos: ", _i, " y pos: ", ceil(_ysin), " sin(_i)=", sin(_i));
+        _ysin += sin(_i/10);
     }
 }
 
@@ -155,23 +156,22 @@ function renderScene() {
     }
 }
 
-function addSymbolToScene(x, y, symbol) {
-    if ((TRANSLATE_POS_X + x) > COLS || (TRANSLATE_POS_Y + y) > LINES) {
-        print("\x1B[1;91;103mERROR: addSymbolToScene(", TRANSLATE_POS_X + x, ", ", TRANSLATE_POS_Y + y, ")", "\x1B[38;48m");
+function addSymbolToScene(_x, _y, _symbol) {
+    if ((TRANSLATE_POS_X + _x) > COLS || (TRANSLATE_POS_Y + _y) > LINES) {
+        print("\x1B[1;91;103mERROR: addSymbolToScene(", TRANSLATE_POS_X + _x, ", ", TRANSLATE_POS_Y + _y, ")", "\x1B[38;48m");
         exit;
     }
     if(debug) {
-        print("\x1B[1;91;103mDEBUG: addSymbolToScene(", TRANSLATE_POS_X + x, ", ", TRANSLATE_POS_Y + y, ")", "\x1B[38;48m");
+        print("\x1B[1;91;103mDEBUG: addSymbolToScene(", TRANSLATE_POS_X + _x, ", ", TRANSLATE_POS_Y + _y, ")", "\x1B[38;48m");
     }
-    SCENE[(TRANSLATE_POS_X + x), (TRANSLATE_POS_Y + y)] = symbol;
+    SCENE[(TRANSLATE_POS_X + _x), (TRANSLATE_POS_Y + _y)] = _symbol;
 }
 
-function ceil(num) {
-    if(num >= 0){
-        return 1 + int(num);
+function ceil(_num) {
+    if(_num >= 0){
+        return 1 + int(_num);
     }
-    if(num < 0) {
-        return int(num);
+    if(_num < 0) {
+        return int(_num);
     }
-
 }
