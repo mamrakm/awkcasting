@@ -35,7 +35,7 @@ function drawCosine() {
     ycos = 0;
     for(i = 0; i < COLS; i += 1) {
         # print("ycos: ", ceil(ycos));
-        addSymbolToScene(i, ceil(ycos), "*");
+        addSymbolToScene(i, ceil(ycos), "\x1B[93m▴\x1B[0m");
         print("x pos: ", i, " y pos: ", ceil(ycos), " cos(i)=", cos(i));
         ycos += cos(i/10);
     }
@@ -46,7 +46,7 @@ function drawSine() {
     ycos = 0;
     for(i = 0; i < COLS; i += 1) {
         # print("ycos: ", ceil(ycos));
-        addSymbolToScene(i, ceil(ycos), "*");
+        addSymbolToScene(i, ceil(ycos), "\x1B[94m▴\x1B[0m");
         print("x pos: ", i, " y pos: ", ceil(ycos), " cos(i)=", cos(i));
         ycos += sin(i/10);
     }
