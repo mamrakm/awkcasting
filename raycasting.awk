@@ -4,6 +4,7 @@ BEGIN {
     LINES = int(LINES / 10) * 10 + 1;
     ACTOR_POS_X = 0;
     ACTOR_POS_Y = 0;
+    debug=0;
 
     TRANSLATE_POS_X = 0;
     TRANSLATE_POS_Y = 0;
@@ -22,20 +23,20 @@ BEGIN {
 }
 
 function initScene() {
-    for(y = 0; y <= LINES; y++) {
-        for(x = 0; x <= COLS; x++) {
+    for(y = 0; y < LINES; y++) {
+        for(x = 0; x < COLS; x++) {
             addSymbolToScene(x, y, " ");
         }
     }
 }
 function drawCosine() {
-    translate(0,20);
-    ycos = TRANSLATE_POS_Y;
-    for(i = TRANSLATE_POS_X; i < COLS; i += 1) {
-        # print(i,",",ycos);
-        addSymbolToScene(i, y, "▴");
-        print("x pos: ", i, " y pos: ", int(ycos), " cos(i)=", cos(i));
-        ycos += cos(i);
+    translate(0, 25);
+    ycos = 0;
+    for(i = 0; i < COLS; i += 1) {
+        # print("ycos: ", ceil(ycos));
+        addSymbolToScene(i, ceil(ycos), "*");
+        print("x pos: ", i, " y pos: ", ceil(ycos), " cos(i)=", cos(i));
+        ycos += cos(i/10);
     }
 }
 
@@ -134,13 +135,31 @@ function drawGrid(xLim, yLim) {
 }
 
 function renderScene() {
-    for(y = 0;y <= LINES; y++) {
-        for(x = 0; x <= COLS; x++) {
+    for(y = 0;y < LINES; y++) {
+        for(x = 0; x < COLS; x++) {
             printf(SCENE[x, y]);
         }
+        printf("\n");
     }
 }
 
 function addSymbolToScene(x, y, symbol) {
-    SCENE[x, y] = symbol;
+    if ((TRANSLATE_POS_X + x) > COLS || (TRANSLATE_POS_Y + y) > LINES) {
+        print("\x1B[1;91;103mERROR: addSymbolToScene(", TRANSLATE_POS_X + x, ", ", TRANSLATE_POS_Y + y, ")", "\x1B[38;48m");
+        exit;
+    }
+    if(debug) {
+        print("\x1B[1;91;103mDEBUG: addSymbolToScene(", TRANSLATE_POS_X + x, ", ", TRANSLATE_POS_Y + y, ")", "\x1B[38;48m");
+    }
+    SCENE[(TRANSLATE_POS_X + x), (TRANSLATE_POS_Y + y)] = symbol;
+}
+
+function ceil(num) {
+    if(num >= 0){
+        return 1 + int(num);
+    }
+    if(num < 0) {
+        return int(num);
+    }
+
 }
