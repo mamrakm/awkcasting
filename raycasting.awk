@@ -132,10 +132,19 @@ function drawGrid(xLim, yLim) {
                     }
                     else {
                         if(y % 10 == 0) {
+                            if (x<10 || y < 10 || y >= LINES - 10 || x >= COLS - 10) {
+                                addSymbolToScene(x, y, "█");
+                            } else {
+                                addSymbolToScene(x, y, " ");
+                            }
                             addSymbolToScene(x, y, "─");
                         }
                         else {
-                            addSymbolToScene(x, y, " ");
+                            if (x<10 || y < 10 || y >= LINES - 10 || x >= COLS - 10 || (x >= (BRICK_COORDINATE_X-1)*10 && x < (BRICK_COORDINATE_X-1) * 10 + 10) && (y >= (BRICK_COORDINATE_Y-1)*10 && y < (BRICK_COORDINATE_Y-1) * 10 + 10)) {
+                                addSymbolToScene(x, y, "█");
+                            } else {
+                                addSymbolToScene(x, y, " ");
+                            }
                         }
                     }
                 }
@@ -174,4 +183,10 @@ function ceil(_num) {
     if(_num < 0) {
         return int(_num);
     }
+}
+
+function tan(_num) {
+    if(sin(_num) == 0)
+        return 0;
+    return (1/cos(_num))*sin(_num);
 }
